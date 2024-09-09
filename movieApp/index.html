@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+
+ 
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script>
+$(function(){
+    $('body')
+        .append('<form id="titleAndRating"></form>');
+    $('#titleAndRating')
+        .append('<input type = "text" name = "title" id = "titleField">')
+        .append('<input type = "text" name = "rating" id = "ratingField">')
+        .append('<input type = "submit" name = "submit" id = "submitButton">');
+
+    $('#titleAndRating').on('submit', function(event){
+        
+        event.preventDefault();
+
+        const titleInput = $('#titleField').val();
+        const ratingInput = $('#ratingField').val();
+
+        if(isNaN(ratingInput) || ratingInput < 1 || ratingInput > 10) {
+            $('#error-message').text('rating must be a number between 1 and 10.');
+            return;
+        }
+        
+
+        const newEntry = $('<div class = "entry"></div>');
+        
+        newEntry.append('<p>Title:' + titleInput + '<p/>');
+        newEntry.append('<p>Rating:' + ratingInput + '</p>');
+
+        const removeButton = $('<button class = "remove">Remove</button>');
+        newEntry.append(removeButton);
+
+        $('body').append(newEntry);
+            
+        
+        removeButton.on('click', function(){
+            $(this).parent('.entry').remove();
+        });
+            
+
+    });
+    
+
+
+
+});
+
+</script>
+</body>
+</html>
